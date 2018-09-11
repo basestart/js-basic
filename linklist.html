@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+    //双向链表
+        function Node( value ) {
+            this.value = value;
+            this.prev = null;
+            this.next = null;
+        }
+
+        var List = function() {
+            this.init.apply( this, arguments );
+        }
+        List.prototype.init = function( val ) {
+            if( arguments.length == 0 ) return false;
+            this.length = 1;
+            var node = new Node( val );
+            this.head = node;
+            this.end = node;
+        }
+
+        List.prototype.push = function( val ) {//尾部添加
+            var node = new Node( val );
+            node.prev = this.end;
+            this.end.next = node;
+            this.end = node;
+            this.length ++;
+            return node.value;//返回新添加的值
+        }
+        List.prototype.pop = function() {//尾部删除
+            var temp = this.end;
+            tempval = temp.value;
+            this.end = temp.prev;
+            this.end.next = null;
+            temp = null;
+            this.length --;
+            return tempval;//返回被弹出的值
+        }
+        List.prototype.unshift = function( val ) {//首位添加
+            var temp = new Node( val );
+            console.log( temp );
+            temp.next = this.head;
+            this.head.prev = temp;
+            this.head = temp;
+            this.length ++;
+            return temp.value;
+        }
+        List.prototype.shift = function() {//首位删除
+            var temp = this.head;
+            this.head = temp.next;
+            this.head.prev = null;
+            var tempval = temp.value;
+            temp = null;
+            this.length --;
+            return tempval;
+        }
+        List.prototype.travas = function() {//遍历输出节点值
+            var cur = this.head;
+            while( cur !== this.end ) {//头节点和尾节点不同则顺序递延！
+                console.log( cur.value );
+                cur = cur.next;
+            }
+            console.log( cur.value );
+        }
+        List.prototype.insert = function( index, val ) {
+            //根据下标插入元素
+            if( index <= 0 || index > this.length + 1 ) return false;
+            var cur = this.head;
+            var tempnode = new Node( val );
+            while( --index ) {
+                cur = cur.next;
+            };
+            if( !cur ) {//尾部添加
+                tempnode.prev = this.end;
+                this.end.next = tempnode;
+                this.end = tempnode;
+                this.length ++;
+                return tempnode.value;
+            }
+            if( cur.prev ) {
+                tempnode.prev = cur.prev; 
+                cur.prev.next = tempnode;//
+            }else{
+                this.head = tempnode;
+            };  //判断是否为首位        
+            tempnode.next = cur;
+            cur.prev = tempnode;
+            this.length ++;
+            return tempnode.value;
+        }
+
+        List.prototype.delByIndex = function( index ) {//根据序号删除元素节点
+            if( index <= 0 || index > this.length ) return false;
+            var cur = this.head;
+            var tempval;
+            while( -- index ) {
+                cur = cur.next;
+            };
+            tempval = cur.value;
+
+            if( !cur.prev ) {
+                 this.head = cur.next;
+                cur = null;
+            }else if( !cur.next ) {
+                this.end = cur.prev;
+                this.end.next = null;
+            }else{
+                cur.prev.next = cur.next;
+                cur.next.prev = cur.prev;
+                cur = null;
+                this.length --;
+                return tempval; 
+            }              
+        }
+
+        List.prototype.delByValue = function( value ) {//根据元素的值删除元素节点
+            var l = this.length;
+            var cur = this.head;
+            var flag = false;
+            while( l -- ) {
+                if( cur.value === value && !cur.prev ) {
+                    this.head = cur.next;
+                    this.head.prev = null;
+                    flag = true;
+                }else if( cur.value === value && !cur.next ) {
+                    this.end = cur.prev;
+                    this.end.next = null;
+                    flag = true;
+                }else if( cur.value === value ) {
+                    cur.prev.next = cur.next;
+                    cur.next.prev = cur.prev;
+                    cur = null;
+                };
+                if( flag ) {
+                    this.length --;
+                    flag = false;
+                };
+                if( cur.next ) cur = cur.next;
+            }
+        }
+
+
+        var L = new List;//创建链表
+        L.init( 2 );//初始化第一个节点
+        L.travas();//遍历输出节点的值
+        L.push(12);//尾部添加一个节点
+        L.travas();//遍历输出节点的值
+        L.insert( 2, 10 );//在第二个位置添加节点
+        L.travas();//遍历输出节点的值
+        L.delByValue( 12 );//删除值为12的节点
+        L.travas();//遍历输出节点的值
+    </script>
+</html>

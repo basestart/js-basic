@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /*function callStu( name ) {
+            return stu1( name );
+        }
+        function stu1( name ) {
+            if( name === "stu1" ) {
+                console.log( "calling me! " + "stu1" );
+            }else{
+                stu2( name );
+            }
+        }
+        function stu2( name ) {
+            if( name === "stu2" ) {
+                console.log( "calling me! " + "stu2" );
+            }else{
+                liXiang( name );
+            }
+        }
+        function liXiang( name ) {
+            if( name === "liXiang" ) {
+                console.log( "calling me! " + "liXiang" );
+            }else{
+                console.log( "不要打搅同学们了，我已经是最前面的！" );
+            }
+        }
+
+        callStu( "liXiang" );
+        callStu( "stu2" );*/
+
+        function stu1( name ) {
+            if( name === "stu1" ) {
+                console.log( "calling me! " + "stu1" );
+            }else{
+                return "not!";
+            }
+        }
+        function stu2( name ) {
+            if( name === "stu2" ) {
+                console.log( "calling me! " + "stu2" );
+            }else{
+                 return "not!";
+            }
+        }
+        function liXiang( name ) {
+            if( name === "liXiang" ) {
+                console.log( "calling me! " + "liXiang" );
+            }else{
+                console.log( "不要打搅同学们了，我已经是最前面的！" );
+            }
+        }
+
+        Function.prototype.after = function( fn ) {
+            var that = this;
+            return function() {
+                var res = that.apply( this, arguments );
+                if( res === "not!" ) {
+                    return fn.apply( this, arguments );
+                }
+            }
+        }
+
+        var callStu = stu1.after( stu2 ).after( liXiang );
+        callStu( "liXiang" );
+        /*function chain( fn ) {
+            this.fn = fn;
+            this.next = null;
+        };
+        chain.prototype.setNext = function( obj ) {
+            this.next = obj;
+        };
+        chain.prototype.callStu = function( name ) {
+            var ret = this.fn.apply( this, arguments );
+            if( ret === "not!" ) {
+                return this.next && this.next.callStu.apply( this.next, arguments );
+            }
+        }*/
+
+        /*var chain1 = new chain( stu1 );
+        var chain2 = new chain( stu2 );
+        var chainLi = new chain( liXiang );
+
+        chain1.setNext( chain2 );
+        chain2.setNext( chainLi );
+
+        chain1.callStu( "liXiang" );*/
+
+    </script>
+</body>
+</html>

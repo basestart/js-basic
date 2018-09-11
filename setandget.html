@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        function check() {
+            console.log( "check all the differences immediately!" );
+        };
+        var obj = { data:10 };
+        Object.defineProperty( obj, "data", {
+            set:function( value ) {
+                this.value = value;
+                console.log( "now setting!" );
+                check();
+            },
+            get:function() {
+                console.log( "you want to get my data?" );
+            }
+        } );
+        obj.data;
+        obj.data = 12;
+    </script>
+</html>

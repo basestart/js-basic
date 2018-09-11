@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script type="text/javascript">
+            var Model = {
+                //这部分不完整，了解即可
+                records:{},//用于保存数据
+                prototype:{
+                    init:function()
+                },
+                create:function() {//create 方法继承Model，创建构造对象
+                    var obj = Object.create( this );
+                    obj.prototype = Object.create( this.prototype )
+                    obj.parent = this;
+                    return object;
+                },
+                init:function() {//Model的create方法创建的对象再次被继承，创建实例
+                    var instance = Object.create( this.prototype );
+                    instance.parent = this;
+                    this.init.apply( instance, arguments );
+                    return instance;
+                }
+            }
+        </script>
+    </body>
+</html>

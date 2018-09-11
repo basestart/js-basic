@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        //约瑟夫环
+        //n 个人， 从k开始计数， 第m个出列
+        //
+        
+        function init( n, k ) {//生成人数序列同时把第k个元素转移到第一位
+            var arr = new Array( n );
+            if( n <= 0  || k <= 0 || k >= n ) return ;
+            while( n-- ) {//生成从1到n升序的数组
+                arr[ n ] = n + 1;//生成n个元素的数组，数组从1开始， 依次递加1，代表同学的初始位置，因为后面会调整数组顺序，所以要进行标记
+            };
+            //把第k个元素往前推到第一位
+            return arr.splice( k - 1 ).concat( arr );
+            
+        };
+        var arr = init( 10, 5 );//生成一个10人顺序排列的数组，同时从第五个人开始
+        
+        function circle( arr, m ) {
+            while( arr.length > 0 ) {//只要数组长度不为0，继续循环
+                // debugger;
+                for( var i = 0; i < m - 1; ++i ) {//每m个人出列一次，也就是把前面7个依次放到数组后面，数组的第一个元素就是第m个人，然后出列（ shift ）；
+                    arr.push( arr.shift() );//把第一个数组元素放到最后一位
+                }
+                var out = arr.shift();//出列
+                console.log( out );
+                // break;
+                // console.log( m + "->" );//输出出列的同学原来所在的位置（数组元素的值）
+            }            
+        }
+        circle( arr, 3 );//初始化后的数组， 数到3出列一位同学
+    </script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script type="text/javascript">
+            /*var Demo = ( function() {
+                var instance;
+                return function() {
+                    if( instance ) return instance;
+                    return instance = this;
+                }
+            } () );
+            var a = new Demo;
+            var b = new Demo;
+            console.log( 'a === b  的判定结果是' + ( a === b ) );*/
+
+
+            /*var Demo = function() {
+                var instance;
+                instance = this;
+                Demo = function(){
+                    return instance;
+                };
+                return instance;
+            }
+            var a = new Demo;
+            var b = new Demo;
+            console.log( '改写构造函数 a === b  的判定结果是' + ( a === b ) );*/
+
+            /*var Demo = function() {
+                if( Demo.instance ) {
+                    return Demo.instance;
+                }else{
+                    Demo.instance = this;
+                    return this;
+                }
+            }
+            var a = new Demo;
+            var b = new Demo;
+            console.log( '挂载instance属性 a === b  的判定结果是' + ( a === b ) );*/
+
+            var Demo = function() {};
+            Demo.single = ( function() {
+                var instance;
+                return function() {
+                    if( instance ) {
+                        return instance;
+                    }else{
+                        return instance = new Demo;
+                    }
+                }
+            } () );
+            var a = new Demo.single;
+            var b = new Demo.single;
+            console.log( '构造函数挂载单例构造函数 a === b  的判定结果是' + ( a === b ) )
+
+        </script>
+    </body>
+</html>

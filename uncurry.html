@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        /*var arr = [ 0, 1, 2, 3, 4 ];
+        var slice = function() {
+            var args = [].slice.call( arguments, 1 );;
+            return [].slice.apply( arguments[ 0 ], args );
+        };
+        var res = slice( arr, 1 );
+        var res2 = slice( arr, 1, 2 );//slice() 参数的下标分别为 数组对象， 起始下标，结束下标 
+        console.log( res, res2 );*/
+
+       /* var arr = [ 0, 1, 2, 3, 4 ];
+        var uncurry = function( fn ) {
+            //uncurry函数
+            var fn = fn;
+            return function() {
+                var args = [].slice.call( arguments, 1 );
+                return fn.apply( arguments[ 0 ], args );
+            }
+        }
+        //泛化slice
+        var slice = uncurry( Array.prototype.slice );
+        var res1 = slice( arr, 1 );
+        var res2 = slice( arr, 1, 2 );
+        console.log( res1, res2 );
+        //泛化push函数
+        var push = uncurry( Array.prototype.push );
+        var res3 = push( arr, 1 );
+        console.log( arr );*/
+
+        /*var arr = [ 0, 1, 2, 3, 4 ];
+        Function.prototype.uncurry = function() {
+            var that = this;
+            return function() {
+                var args = [].slice.call( arguments, 1 );
+                return that.apply( arguments[ 0 ], args );
+            }
+        };
+        var slice = Array.prototype.slice.uncurry();
+        var res1 = slice( arr, 1 );
+        var res2 = slice( arr, 1, 2 );
+        console.log( res1, res2 );*/
+        var arr = [ 0, 1, 2, 3, 4 ];
+        var uncurry = Function.prototype.bind.bind( Function.prototype.call );
+        var slice = uncurry( Array.prototype.slice );
+        var res1 = slice( arr, 1 );
+        var res2 = slice( arr, 1, 2 );
+        console.log( res1, res2 );
+
+
+    </script>
+</html>

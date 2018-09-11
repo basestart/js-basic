@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script type="text/javascript">
+            function Create( nodeType ) {
+                this.node = document.createElement( nodeType );
+                this.click = function() {
+                    console.log( this.node.nodeName + " was clicked!" );
+                }
+                this.init();
+            }
+            Create.prototype.init = function( txt ) {
+                this.node.innerHTML = txt;
+                document.body.appendChild( this.node );
+                this.node.onclick = this.click.bind( this );
+            }           
+
+            var div = new Create( "button" );
+            div.init( "try to click me!" );
+        </script>
+    </body>
+</html>

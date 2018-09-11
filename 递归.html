@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>  
+        <script type="text/javascript">
+            // function recur_sum( num ) {
+            //     if( num <= 1 ) return num;
+            //     return recur_sum( num - 1 ) + num;
+            // };
+            // console.log( recur_sum( 10 ) );
+
+            /*function recur_multi( num ) {
+                if( num <= 1 ) return num;
+                return recur_multi( num - 1 ) * num;
+            }
+            console.log( recur_multi( 5 ) );*/
+
+            //斐波那契序列
+            /*function fibs( num ) {
+                if( num === 1 ) return 1;
+                if( num === 2 ) return 1;
+                return fibs( num - 1 )  + fibs( num - 2 );
+            }
+            console.log( fibs( 5 ) );*///第n个序列的数字是？
+
+            // 快排
+            /*function quicksort( arr ) {
+                if( arr.length <= 1 ) return arr;
+                var left = [],
+                    right = [],
+                    pivotIndex = Math.floor( arr.length / 2 ),
+                    paviotValue = arr.splice( pivotIndex, 1 ),
+                    l = arr.length;
+                    for( var i = 0; i < l; ++i ) {
+                        if( arr[ i ] < paviotValue ) {
+                            left.push( arr[ i ] );
+                        }else{
+                            right.push( arr[ i ] );
+                        }
+                    }
+                return quicksort( left ).concat( paviotValue, quicksort( right ) );
+            }
+
+            var arr = [ 1,2,7,4,2,5,7,9,0,4,3,2];
+            console.log( quicksort( arr ) );*/
+
+            // 汉诺塔
+            /*function HNT( index, a, b, c ) {
+                if( index === 1 ) {
+                    console.log( a + " -> " + c );
+                    return; 
+                }
+                HNT( index - 1, a, c, b );
+                console.log( a + " -> "  + c );
+                HNT( index - 1, b ,a, c );
+            };
+            HNT( 3, "左", "中", "右" );*/
+
+            // 函数传参
+            // sum排序的时候传递比较函数
+            /*var arr = [1,2,12,32,5];
+            // arr.sort();
+            arr.sort( function( a, b ) {
+                //a,b比较返回布尔值！！！！！！
+                //布尔值的真假决定是否进行下一步操作， 高级函数的逻辑普遍适用
+                //真--->交换位置！
+                //假--->不交换位置！
+                if( a > b ) {
+                    return false;
+                }else{
+                    return true;
+                }
+            } )
+            console.log( arr );*/
+
+
+            // map函数操作数组
+            // map， reduce， filter都是Array.prototype上固有的函数；
+            //map的功能是对数组的每一个元素按照传递的高阶函数进行操作，返回一个新的数组；操作数组的效率比循环遍历高
+            // var arr = [ 1, 2, 3, 4 ];
+            /*console.log( arr.map( function( x ) { return 2 * x;  } ) );
+            console.log( arr );*/
+
+            // console.log( arr.map( function( x ) {
+            //     if( x === 1 ) return x;
+            //     return arguments.callee( x - 1 ) * x;
+            // } ) );
+            // 
+            // map reduce 函数式封装阶乘累加函数！
+            // 10！ + 9 ！ + 8！ + 7！ + 6！ + 5！ + 4 ！ + 3！ + 2！ + 1！；
+            // 10！ = 10*9*8*7*6*5*4*3*2*1
+            // 9！  =    9*8*7*6*5*4*3*2*1
+            // 8！  =      8*7*6*5*4*3*2*1
+            // .。。。。
+            // 2！  =                  2*1
+            // 1！  =                  1*1
+            // 
+            // 阶乘和！
+            var arr = [ 1, 2, 3, 4 ];
+            var m = arr.map( function( x ) {
+                if( x === 1 ) return x;
+                return arguments.callee( x - 1 ) * x;
+            } ).reduce( function( x, y ) {
+                return x + y;
+            } ) ;
+            console.log( m );
+
+
+
+            // 约瑟夫环
+            // function circle( personcount, interval ) {
+            //     if( personcount <= 1 ) return false;
+            //     var arr = new Array( personcount );
+            //     while( personcount-- ) {
+            //         arr[ personcount ] = personcount + 1;
+            //     };
+            //     var l = arr.length;
+            //     console.log( l );
+            //     while( l > 1 ) {
+            //         for( var i = 0; i < interval - 1; ++i ) {
+            //             arr.push( arr.shift() );
+            //         };
+            //         arr.splice( 0, 1 );
+            //         // console.log( arr );
+            //         l--;
+            //         // break;
+            //     }
+            //     return arr;
+            //     // console.log( arr );
+            // }
+            // console.log( circle( 5, 3 ) );
+            // 
+            
+
+            // js实现链表，包括增删改查 push， pop， shift， unshift， findByRank， findByVal
+            // 
+            /*var Node = function( value ) {
+                this.value = value;
+                this.prev = null;
+                this.next = null;
+            }
+
+            var List = function() {
+                this.init.apply( this, arguments );
+            }
+            List.prototype.init = function( val ) {
+                this.head = new Node( val );
+                this.end = this.head;
+                this.length = 1;
+            }
+            List.prototype.push = function( val ) {
+                var node = new Node( val );                
+                this.end.next = node;
+                node.prev = this.end;
+                this.end = node;
+                this.length ++;
+            }
+            List.prototype.pop = function() {
+                var tempVal = this.end.value;
+                this.end = this.end.prev;
+                this.end.next = null;
+                this.length--;
+                return tempVal;
+            }
+            List.prototype.show = function() {
+                var l = this.length;
+                var cur = this.head;
+                for( var i = 0; i < l; ++i ) {
+                    console.log( cur.value );
+                    if( cur.next ) cur = cur.next;
+                }
+            }
+            var l = new List( 1 );
+            l.push( 2 );
+            l.push( 3 );
+            l.show();*/
+
+
+            
+            
+        </script>
+    </body>
+</html>

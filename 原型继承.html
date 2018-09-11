@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        Object.create = ( function( obj ) {
+            if( !Object.create ) {//如果没有原型继承函数， 则重写
+                return function() {
+                    var F = function() {};
+                    F.prototype = obj;
+                    obj.constructor = F;//改写constructor
+                    return new F();
+                }
+            }else{//如果有原型继承函数，则返回；
+                return Object.create;
+            }
+        }) ();
+        var obj = { name: "hello" };
+        var subObj = Object.create( obj );
+        console.log( subObj );
+
+        function Super(){};
+        function Sub() {
+            Super.apply( this, arguments );
+        }
+        Sub.prototype = Object.create( Super.prototype );
+    </script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        /*var obj = {
+            say:function() {
+                console.log( "obj is talking!" )
+            },
+            late:function() {
+                //实现1秒后调用say方法
+                var that = this;
+                setTimeout(function() {
+                    that.say();
+                }, 1000)
+            }
+        } */
+        var obj = {
+            say:function() {
+                console.log( "obj is talking!" )
+            },
+            late:function() {
+                //实现1秒后调用say方法
+                var that = this;
+                setTimeout( this.say.bind( this ), 1000)
+            }
+        }
+        obj.late();
+    </script>
+</html>
